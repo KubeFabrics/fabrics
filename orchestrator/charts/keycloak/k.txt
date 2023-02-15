@@ -1,0 +1,32 @@
+NAME: aim
+LAST DEPLOYED: Tue Feb 14 13:08:08 2023
+NAMESPACE: common
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: keycloak
+CHART VERSION: 13.0.4
+APP VERSION: 20.0.3
+
+** Please be patient while the chart is being deployed **
+
+Keycloak can be accessed through the following DNS name from within your cluster:
+
+    aim-keycloak.common.svc.cluster.local (port 80)
+
+To access Keycloak from outside the cluster execute the following commands:
+
+1. Get the Keycloak URL by running these commands:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        You can watch its status by running 'kubectl get --namespace common svc -w aim-keycloak'
+
+    export HTTP_SERVICE_PORT=$(kubectl get --namespace common -o jsonpath="{.spec.ports[?(@.name=='http')].port}" services aim-keycloak)
+    export SERVICE_IP=$(kubectl get svc --namespace common aim-keycloak -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+
+    echo "http://${SERVICE_IP}:${HTTP_SERVICE_PORT}/"
+
+2. Access Keycloak using the obtained URL.
+
+3. Get password from secret and the default user is "user" not admin

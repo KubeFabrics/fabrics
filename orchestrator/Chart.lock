@@ -1,0 +1,12 @@
+dependencies:
+- name: harbor
+  repository: https://charts.bitnami.com/bitnami
+  version: 16.3.4
+- name: vault
+  repository: https://charts.jfrog.io
+  version: 0.16.1
+- name: keycloak
+  repository: https://charts.bitnami.com/bitnami
+  version: 13.0.4
+digest: sha256:164f823065496a676538e17e68bfe8cbf8539718fe159699b2ace53b65440e09
+generated: "2023-02-14T13:11:43.52026638-10:00"
