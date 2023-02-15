@@ -1,0 +1,67 @@
+apiVersion: v1
+entries:
+  appfabric:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-14T14:27:24.332614541-10:00"
+    description: 'The appfabric chart combines a complete environment for building
+      applications including obserability, alerting, AIOps.  Messaging  support is
+      provided via Kafka and Argo-events.  Block storage uses mini.io while DB services
+      use cockroach.  Promethous and Elastic provide time series and event processing
+      and search capabilities. '
+    digest: 691c2c2076c890a23fc0fee18a5d78bef75d9c47d3db737d70c1b5a9b97c1ca8
+    name: appfabric
+    type: application
+    urls:
+    - appfabric-0.1.0.tgz
+    version: 0.1.0
+  meanfabric:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-14T14:27:24.332992396-10:00"
+    description: 'Install a complete mean stack with integrated monitoring, observability,
+      and AIOps. '
+    digest: a0474ac54a2c879e555a83d2e06dfc016ef346ad7d6a15102901959065c318ea
+    name: meanfabric
+    type: application
+    urls:
+    - meanfabric-0.1.0.tgz
+    version: 0.1.0
+  orchestrator:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-14T14:27:24.45208139-10:00"
+    dependencies:
+    - name: harbor
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.3.4
+    - name: vault
+      repository: https://charts.jfrog.io
+      version: 0.16.1
+    - name: keycloak
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.0.4
+    description: 'Installs event and work orchestrator. These tools support building
+      Event based pipelines and integrations combined with big data tools like Spark
+      and DeltaLake.  Supports creating Microservices and FaaS or using JQ, and Lua
+      to  manipulate pipelines '
+    digest: 7ba3a4203e54e462c0a596dc5feb44e059f93ec36813823ee3536b2ce1e7201d
+    name: orchestrator
+    type: application
+    urls:
+    - orchestrator-0.1.0.tgz
+    version: 0.1.0
+  sparkfabric:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-14T14:27:24.452656321-10:00"
+    description: 'Build a complete data pipeline using Spark and DeltaLake. Ingrates
+      tools for performing ETL/ELT, ML workflows/workbooks. Secure sharing and data
+      catalogs '
+    digest: 2f3c9baf29211aae96da09fc91ab86d13ead8278b360824380a62da9d3d7d16f
+    name: sparkfabric
+    type: application
+    urls:
+    - sparkfabric-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-02-14T14:27:24.332035772-10:00"
