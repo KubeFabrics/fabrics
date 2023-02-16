@@ -3,34 +3,25 @@ entries:
   appfabric:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T14:27:24.332614541-10:00"
+    created: "2023-02-15T16:24:11.648087668-10:00"
     description: 'The appfabric chart combines a complete environment for building
       applications including obserability, alerting, AIOps.  Messaging  support is
       provided via Kafka and Argo-events.  Block storage uses mini.io while DB services
       use cockroach.  Promethous and Elastic provide time series and event processing
       and search capabilities. '
-    digest: 691c2c2076c890a23fc0fee18a5d78bef75d9c47d3db737d70c1b5a9b97c1ca8
+    digest: 55308e19b06a091ea622f6249244587bbb2a76fdfdc1dd257b630e299dc0bf03
     name: appfabric
     type: application
     urls:
     - appfabric-0.1.0.tgz
     version: 0.1.0
-  meanfabric:
-  - apiVersion: v2
+  common:
+  - annotations:
+      category: Infrastructure
+      licenses: Apache-2.0
+    apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T14:27:24.332992396-10:00"
-    description: 'Install a complete mean stack with integrated monitoring, observability,
-      and AIOps. '
-    digest: a0474ac54a2c879e555a83d2e06dfc016ef346ad7d6a15102901959065c318ea
-    name: meanfabric
-    type: application
-    urls:
-    - meanfabric-0.1.0.tgz
-    version: 0.1.0
-  orchestrator:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2023-02-14T14:27:24.45208139-10:00"
+    created: "2023-02-15T16:24:11.721872997-10:00"
     dependencies:
     - name: harbor
       repository: https://charts.bitnami.com/bitnami
@@ -41,11 +32,135 @@ entries:
     - name: keycloak
       repository: https://charts.bitnami.com/bitnami
       version: 13.0.4
+    description: Install common service for KubeFabric including - repositories -
+      identity management - secret management - monitoring - logging
+    digest: 5fff322f078a703cddaaad0140cb2354c5ce742b34f14db97e901c57b5d56388
+    keywords:
+    - helm
+    - secrets
+    - idenity
+    - vault
+    - prometheus
+    - keycloak
+    - harbor
+    - oci
+    - docker
+    - elastic
+    - alertmanager
+    - opentelemetry
+    maintainers:
+    - name: PavedRoad
+      url: https://kubefabrics.github.io/fabrics/
+    name: common
+    sources:
+    - https://kubefabrics.github.io/fabrics/common
+    type: application
+    urls:
+    - common-0.1.0.tgz
+    version: 0.1.0
+  harbor:
+  - annotations:
+      category: Infrastructure
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.7.0
+    created: "2023-02-15T16:24:11.740187591-10:00"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.x.x
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.x.x
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Harbor is an open source trusted cloud-native registry to store,
+      sign, and scan content. It adds functionalities like security, identity, and
+      management to the open source Docker distribution.
+    digest: a782387fc1381c71c223f201caf032907e8e66347915e62a59e79680135d1e78
+    home: https://github.com/bitnami/charts/tree/main/bitnami/harbor
+    icon: https://bitnami.com/assets/stacks/harbor-core/img/harbor-core-stack-220x234.png
+    keywords:
+    - docker
+    - registry
+    - vulnerability
+    - scan
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    name: harbor
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/harbor-core
+    - https://github.com/bitnami/containers/tree/main/bitnami/harbor-portal
+    - https://github.com/bitnami/containers/tree/main/bitnami/harbor-jobservice
+    - https://github.com/bitnami/containers/tree/main/bitnami/harbor-registry
+    - https://github.com/bitnami/containers/tree/main/bitnami/harbor-registryctl
+    - https://goharbor.io/
+    urls:
+    - common/harbor-16.3.4.tgz
+    version: 16.3.4
+  keycloak:
+  - annotations:
+      category: DeveloperTools
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 20.0.3
+    created: "2023-02-15T16:24:11.747244361-10:00"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.x.x
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Keycloak is a high performance Java-based identity and access management
+      solution. It lets developers add an authentication layer to their applications
+      with minimum effort.
+    digest: 2f0c2e87a60b32f9c607ca4b36ae73ef2732315886cf9eec5fa1caeb4d29bfc5
+    home: https://www.keycloak.org
+    icon: https://bitnami.com/assets/stacks/keycloak/img/keycloak-stack-220x234.png
+    keywords:
+    - keycloak
+    - access-management
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    name: keycloak
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/keycloak
+    - https://github.com/keycloak/keycloak
+    urls:
+    - common/keycloak-13.0.5.tgz
+    version: 13.0.5
+  meanfabric:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-15T16:24:11.722370538-10:00"
+    description: 'Install a complete mean stack with integrated monitoring, observability,
+      and AIOps. '
+    digest: 50888674039440c6a1231a3a85ebc6b77df08d25397f92dc59eec257f3c036ff
+    name: meanfabric
+    type: application
+    urls:
+    - meanfabric-0.1.0.tgz
+    version: 0.1.0
+  orchestrator:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-15T16:24:11.722903152-10:00"
     description: 'Installs event and work orchestrator. These tools support building
       Event based pipelines and integrations combined with big data tools like Spark
       and DeltaLake.  Supports creating Microservices and FaaS or using JQ, and Lua
       to  manipulate pipelines '
-    digest: 7ba3a4203e54e462c0a596dc5feb44e059f93ec36813823ee3536b2ce1e7201d
+    digest: b97a1f586d0cd9fb7d1cdaa9500172d2061d851b60490448524e4acc9fbd5299
     name: orchestrator
     type: application
     urls:
@@ -54,14 +169,40 @@ entries:
   sparkfabric:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T14:27:24.452656321-10:00"
+    created: "2023-02-15T16:24:11.723282727-10:00"
     description: 'Build a complete data pipeline using Spark and DeltaLake. Ingrates
       tools for performing ETL/ELT, ML workflows/workbooks. Secure sharing and data
       catalogs '
-    digest: 2f3c9baf29211aae96da09fc91ab86d13ead8278b360824380a62da9d3d7d16f
+    digest: c49de27e0266b49a4ab3365878224e6318701464ad61db2a806c057f1a8daa16
     name: sparkfabric
     type: application
     urls:
     - sparkfabric-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-14T14:27:24.332035772-10:00"
+  vault:
+  - apiVersion: v2
+    appVersion: 1.8.3
+    created: "2023-02-15T16:24:11.749755614-10:00"
+    description: Official HashiCorp Vault Chart
+    digest: 6a97bad07db71d56faf5f1ea8bede4d7b67191cb836f0ac002909d7e7452cba1
+    home: https://www.vaultproject.io
+    icon: https://github.com/hashicorp/vault/raw/f22d202cde2018f9455dec755118a9b84586e082/Vault_PrimaryLogo_Black.png
+    keywords:
+    - vault
+    - security
+    - encryption
+    - secrets
+    - management
+    - automation
+    - infrastructure
+    kubeVersion: '>= 1.14.0-0'
+    name: vault
+    sources:
+    - https://github.com/hashicorp/vault
+    - https://github.com/hashicorp/vault-helm
+    - https://github.com/hashicorp/vault-k8s
+    - https://github.com/hashicorp/vault-csi-provider
+    urls:
+    - common/vault-0.16.1.tgz
+    version: 0.16.1
+generated: "2023-02-15T16:24:11.647420324-10:00"

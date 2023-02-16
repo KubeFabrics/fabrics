@@ -1,0 +1,36 @@
+https://www.hashicorp.com/blog/announcing-the-vault-helm-chart
+https://developer.hashicorp.com/vault/tutorials/operations/generate-root
+
+
+
+Unseal Key 1: iNGtrzwnNDvsmTLPBcjgEslcZio7ywxunCtpxxsyjM1N
+Unseal Key 2: IHDzZpHwfAPd9BbBmJhZHMGVYn9EANeTKiy/PXFR6bvF
+Unseal Key 3: gIRk6FbNwEPeZQ1LGtwQjv1ZBQ0OD2t7cGmhqYAMt9NB
+Unseal Key 4: 9ymL0aoxkPY9dD7Sk4ii97K+H1lIjILLqahCV+aDb5PA
+Unseal Key 5: pR4UvYV7P/pf50JA+jouwOW5kUoEWLXmpOEdLjhV1Dzw
+
+issue unseal for each key
+
+kubectl exec -it vault-eval-0 -- vault operator generate-root -init
+A One-Time-Password has been generated for you and is shown in the OTP field.
+You will need this value to decode the resulting root token, so keep it safe.
+Nonce         918b2afe-ce2e-59fa-42b1-20120018f2b5
+Started       true
+Progress      0/3
+Complete      false
+OTP           dWvGJA701tBv3GJ6WE30d1a4d1
+OTP Length    26
+
+
+kubectl exec -it vault-eval-0 -- vault operator generate-root
+Operation nonce: 918b2afe-ce2e-59fa-42b1-20120018f2b5
+Unseal Key (will be hidden): 
+Nonce            918b2afe-ce2e-59fa-42b1-20120018f2b5
+Started          true
+Progress         3/3
+Complete         true
+Encoded Token    F3lDBg8ZXWUGGC9PADYtXDwCYldQRDNYBl4
+
+$ kubectl exec -it vault-eval-0 -- vault operator generate-root -decode=F3lDBg8ZXWUGGC9PADYtXDwCYldQRDNYBl4 -otp=dWvGJA701tBv3GJ6WE30d1a4d1
+s.5AEXjU7lm93qgjkGQg4uRlbo
+

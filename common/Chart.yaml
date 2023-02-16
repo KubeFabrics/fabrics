@@ -1,0 +1,44 @@
+apiVersion: v2
+name: common
+description: Install common service for KubeFabric including
+        - repositories
+        - identity management
+        - secret management
+        - monitoring
+        - logging
+type: application
+appVersion: "v2"
+appVersion: "1.16.0"
+version: "0.1.0"
+annotations:
+  category: Infrastructure
+  licenses: Apache-2.0
+keywords:
+- helm
+- secrets
+- idenity
+- vault
+- prometheus
+- keycloak
+- harbor
+- oci
+- docker
+- elastic
+- alertmanager
+- opentelemetry
+maintainers:
+- name: PavedRoad
+  url: https://kubefabrics.github.io/fabrics/
+sources:
+-  https://kubefabrics.github.io/fabrics/common
+dependencies:
+- name: harbor
+  version: "16.3.4"
+  repository: "https://charts.bitnami.com/bitnami"
+- name: vault
+  version: "0.16.1"
+  repository: "https://charts.jfrog.io"
+- name: keycloak
+  version: "13.0.4"
+  repository: "https://charts.bitnami.com/bitnami"
+
